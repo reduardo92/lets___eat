@@ -15,7 +15,6 @@ const Header = styled.header`
   background-color: white;
   position: ${props => props.position};
   margin-bottom: ${props => props.bottom};
-  z-index: 5;
 
   .info {
     display: flex;
@@ -134,13 +133,15 @@ const Header = styled.header`
   }
 
   @media screen and (min-width: 1020px) {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding-bottom: 0;
-    align-items: center;
-    max-width: 1800px;
-    margin: 0 auto;
+    .contain {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-bottom: 0;
+      align-items: center;
+      margin: 0 auto;
+      max-width: 1800px;
+    }
 
     .info {
       .addres {
@@ -198,60 +199,62 @@ const Navigation = props => {
   );
   return (
     <Header ref={navRef} hideScroll={scrolled ? 'fixed' : 'relative'}>
-      <div className='info'>
-        <div className='addres'>
-          <p>
-            <FaMapMarker /> 850 s main dr, chicago, Il, 60432
-          </p>
-          <p>
-            <FaPhone /> (800)-456-8970
-          </p>
+      <div className='contain'>
+        <div className='info'>
+          <div className='addres'>
+            <p>
+              <FaMapMarker /> 850 s main dr, chicago, Il, 60432
+            </p>
+            <p>
+              <FaPhone /> (800)-456-8970
+            </p>
+          </div>
+          <div className='social'>
+            <FaInstagram />
+            <FaFacebook />
+          </div>
         </div>
-        <div className='social'>
-          <FaInstagram />
-          <FaFacebook />
-        </div>
+        <Link to='/' className='logo'>
+          <img src={Logo} alt='logo' />
+        </Link>
+
+        <button onClick={() => setToggle(!toggle)} className='burger-toggle'>
+          <div />
+          <div />
+          <div />
+        </button>
+
+        <nav className={`nav-links ${toggle ? 'active' : ''}`}>
+          <NavLink
+            onClick={() => setToggle(!toggle)}
+            to='/'
+            className='nav-links_item'
+          >
+            Home
+          </NavLink>
+          <NavLink
+            onClick={() => setToggle(!toggle)}
+            to='/about'
+            className='nav-links_item'
+          >
+            About
+          </NavLink>
+          <NavLink
+            onClick={() => setToggle(!toggle)}
+            to='/menu'
+            className='nav-links_item'
+          >
+            Menu
+          </NavLink>
+          <NavLink
+            onClick={() => setToggle(!toggle)}
+            to='/atmosphere'
+            className='nav-links_item'
+          >
+            Atmosphere
+          </NavLink>
+        </nav>
       </div>
-      <Link to='/' className='logo'>
-        <img src={Logo} alt='logo' />
-      </Link>
-
-      <button onClick={() => setToggle(!toggle)} className='burger-toggle'>
-        <div />
-        <div />
-        <div />
-      </button>
-
-      <nav className={`nav-links ${toggle ? 'active' : ''}`}>
-        <NavLink
-          onClick={() => setToggle(!toggle)}
-          to='/'
-          className='nav-links_item'
-        >
-          Home
-        </NavLink>
-        <NavLink
-          onClick={() => setToggle(!toggle)}
-          to='/about'
-          className='nav-links_item'
-        >
-          About
-        </NavLink>
-        <NavLink
-          onClick={() => setToggle(!toggle)}
-          to='/menu'
-          className='nav-links_item'
-        >
-          Menu
-        </NavLink>
-        <NavLink
-          onClick={() => setToggle(!toggle)}
-          to='/atmosphere'
-          className='nav-links_item'
-        >
-          Atmosphere
-        </NavLink>
-      </nav>
     </Header>
   );
 };
